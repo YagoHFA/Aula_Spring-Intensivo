@@ -1,5 +1,6 @@
 package com.hyllcron.hfa.Services;
 
+import com.hyllcron.hfa.Projections.GameMinProjection;
 import com.hyllcron.hfa.dto.GameDTO;
 import com.hyllcron.hfa.dto.GameMinDTO;
 import com.hyllcron.hfa.entities.Game;
@@ -25,6 +26,13 @@ public class GameServices {
     public GameDTO findById(Long gameId){
         Game result = gameRepositorie.findById(gameId).get();
         GameDTO dto = new GameDTO(result);
+        return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findByList(Long listId){
+        List<GameMinProjection>result = gameRepositorie.searchByList(listId);
+        List<GameMinDTO> dto  = result.stream().map(x -> new GameMinDTO(x)).toList();
         return dto;
     }
 }

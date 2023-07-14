@@ -1,6 +1,7 @@
 package com.hyllcron.hfa.dto;
 
 
+import com.hyllcron.hfa.Projections.GameMinProjection;
 import com.hyllcron.hfa.entities.Game;
 
 public class GameMinDTO {
@@ -20,6 +21,14 @@ public class GameMinDTO {
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         shortDescription = entity.getShortDescription();
+    }
+
+    public GameMinDTO(GameMinProjection projection) {
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
     }
 
     public long getId() {
